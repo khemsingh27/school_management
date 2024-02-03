@@ -43,41 +43,42 @@ class TeacherController extends Controller
         
         $user = auth()->user();
         $teacherDetails = $user->teacherDetails();
-    
-        
         
         $client_data = [];
-        foreach($teacherDetails as $teacherDetail){
-            
-            $teacherCLass = Teacher::find($teacherDetail->id)->with('teacherClass')->get();
-            foreach($teacherCLass as $teacherCLasses ){
-                print_r($teacherCLasses); die();
-            }
-            // echo"<pre>";print_r($teacher);die();
-            // dd($teacher);
-            $teacher_class ="";
-            if(is_array($teacherCLass->class_id)){
-                foreach($teacherCLass->class_id as $class_id){
-                    $teacher_class .= '<span class="badge bg-primary">Class '.$class_id.'</span>';
+        $uniqueTeachers = [];
+        
+        foreach ($teacherDetails as $teacherDetail) {
+            // Check if teacher details are already added
+            if (!isset($uniqueTeachers[$teacherDetail->id])) {
+                $teacherClasses = Teacher::with('teacherClass')->find($teacherDetail->id);
+        
+                $teacher_class = "";
+        
+                foreach ($teacherClasses->teacherClass as $class) {
+                    $teacher_class .= '<span class="badge bg-primary" style=" background-color:#717ff5!important; " >Class ' . $class->class_id . '</span>';
                 }
-            }else{
-                $teacher_class .= '<span class="badge bg-primary">Class '.$teacherDetail->class_id.'</span>';
+        
+                $client_data[] = array(
+                    "id" => $teacherDetail->id,
+                    'name' => $teacherDetail->name,
+                    "email" => $teacherDetail->email,
+                    "class_id" => $teacher_class,
+                );
+        
+                // Mark teacher as added
+                $uniqueTeachers[$teacherDetail->id] = true;
             }
-
-            $client_data[] = array(
-                "id" => $teacherDetail->id,
-                'name' => $teacherDetail->name,
-                "email" => $teacherDetail->email,
-                "class_id" => $teacher_class
-            );
         }
-    
+        
         return response()->json([
             'draw' => $request->input('draw', 1),
-            'recordsTotal' => $teacherDetails->count(),
-            'recordsFiltered' => $teacherDetails->count(),
+            'recordsTotal' => count($client_data),
+            'recordsFiltered' => count($client_data),
             'data' => $client_data,
         ]);
+        
+        
+
     }
     // Add Teacher
     public function store(Request $request){
@@ -146,5 +147,14 @@ class TeacherController extends Controller
         $user->deleteTeacher($id,$email);
 
         return Redirect::to('/dashboard');
+    }
+    // New View teacher
+    public function newView(){
+        $main = "Hello";
+        $teacher = view('auth.addteacher')->render();
+        return response()->json([
+            'status' => true,
+            'main' => $teacher,
+        ]);
     }
 }

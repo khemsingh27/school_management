@@ -27,12 +27,15 @@
   <link href="{{url('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{url('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
-<!-- Include jQuery -->
-<script src="{{url('https://code.jquery.com/jquery-3.6.4.min.js')}}"></script>
-<script src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js')}}"></script>
-<script src="{{url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- Include jQuery -->
+  <script src="{{url('https://code.jquery.com/jquery-3.6.4.min.js')}}"></script>
+  <script
+    src="{{url('https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js')}}"></script>
+  <script src="{{url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js')}}"></script>
 
-
+  <!-- Select two -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
   <!-- DataTable Css -->
   <link href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css" rel="stylesheet">
@@ -55,6 +58,47 @@
     .error {
       color: red;
     }
+
+    .newmodel {
+      border: none;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      height: 54px;
+      background: #fff;
+    }
+
+
+    .select2-selection {
+      border: none!important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)!important;
+      border-radius: 4px!important;
+      height: 54px!important;
+      background: #fff!important;
+    }
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+      border: none!important;
+      background-color: #717ff5!important;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+      border-right: 1px solid white!important;
+    }
+    .select2-selection__choice__remove{
+      color:white!important;
+    }
+    .select2-selection__choice__display{
+      color:white!important;
+    }
+    .datepicker{
+      border: 1px solid #d7d2d2;
+      width: 100%;
+      height: 60%;
+      border-radius: 6px;
+      padding: 7px;
+    }
+    #example{
+      width: 100%!important;
+    }
   </style>
 </head>
 
@@ -65,8 +109,8 @@
 
       <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
-          <img src="assets/img/logo.png" alt="">
-          <span class="d-none d-lg-block">Poplify Academy</span>
+          <img src="assets/img/poplify.png" alt="">
+          <span class="d-none d-lg-block"></span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div><!-- End Logo -->
@@ -232,12 +276,13 @@
 
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
               <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-              <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+              <!-- {{$user = auth()->user()}} -->
+              <span class="d-none d-md-block dropdown-toggle ps-2">{{$user->name}}</span>
             </a><!-- End Profile Iamge Icon -->
 
             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
               <li class="dropdown-header">
-                <h6>Kevin Anderson</h6>
+                <h6>{{$user->name}}</h6>
                 <span>Web Designer</span>
               </li>
               <li>
@@ -275,10 +320,21 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <!-- <a class="dropdown-item d-flex align-items-center" href="#">
                   <i class="bi bi-box-arrow-right"></i>
                   <span>Sign Out</span>
-                </a>
+                </a> -->
+
+
+                <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                  <!-- Submit Button -->
+                  <button type="submit" id="signout" class="btn btn-danger" name="signout">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Sign Out</span>
+                  </button>
+                </form>
+
               </li>
 
             </ul><!-- End Profile Dropdown Items -->
@@ -295,25 +351,30 @@
       <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-          <a class="nav-link " href="index.html">
+          <a class="nav-link " href="{{route('dashboard') }}">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
           </a>
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" id="teacher" href="{{route('viewTeacher') }}">
             <i class="fa-solid fa-school"></i><span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" id="student" href="#">
             <i class="fa-solid fa-school"></i><span>Student</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" id="classes" href="#">
             <i class="fa-solid fa-school"></i><span>Classes</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="attendance" href="#">
+            <i class="fa-solid fa-school"></i><span>Attendance</span>
           </a>
         </li>
         <!-- End Components Nav -->

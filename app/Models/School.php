@@ -16,4 +16,7 @@ class School extends Model
     {
         return $this->belongsTo(User::class, 'users_id');
     }
+    public function studentAttendance(){
+        return $this->hasOne(StudentAttendance::class);
+    } 
 }
