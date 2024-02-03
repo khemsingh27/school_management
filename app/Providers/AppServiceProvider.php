@@ -20,16 +20,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         
-        if (config('app.env') === 'local') {
-            \DB::listen(function($query) {
-                echo"<pre>";print_r($query->sql);echo"</pre>";
-                echo"<pre>";print_r($query->bindings);echo"</pre>";
-                \Log::info($query->sql, [
-                    'bindings' => $query->bindings,
-                    'time' => $query->time
-                ]);
-            });
-        }
+        // if (config('app.env') === 'local') {
+        //     \DB::listen(function($query) {
+        //         echo"<pre>";print_r($query->sql);echo"</pre>";
+        //         echo"<pre>";print_r($query->bindings);echo"</pre>";
+        //         \Log::info($query->sql, [
+        //             'bindings' => $query->bindings,
+        //             'time' => $query->time
+        //         ]);
+        //     });
+        // }
 
     }
 }

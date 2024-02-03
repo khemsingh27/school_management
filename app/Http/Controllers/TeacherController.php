@@ -2,8 +2,6 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Redirect;
 use Psy\Readline\Hoa\Console;
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 use App\Models\User;
 use App\Models\TeacherClass;
@@ -17,38 +15,73 @@ use Illuminate\Support\Facades\Hash;
 
 class TeacherController extends Controller
 {
+    // View Teacher
     public function viewTeacher(Request $request)
     {
-
-
-
+        // $teacherDetails = array();
         // $teachers = Teacher::with('teacherClass')->get()->toArray();
-        // echo"<pre>";print_r($teachers);die();
 
-        $user_teachers = User::find(64)->with('teacher')->get();
-        foreach($user_teachers as $user_teacher){
-            dd($user_teacher->with('teacherClass'));
-        }
+        // $teacherDetails = $teachers;
+        // $teacherCLass = TeacherClass::all();
+        // $json = json_encode($teachers);
 
+        // echo"<pre>";print_r($json);die();
 
+        // $teacherDetails = User::find(28)->with('teacher')->get();
 
+        // echo '<pre>'; print_r($teacherDetails); echo '</pre>';
+        // foreach($teacherDetails as $user_teacher){
+        //     $user_teacher->with('teacherClass');
+            // $user_teacher->with('teacherClass');
+            // print_r($user_teacher->with('teacherClass'));
+        // }
 
+        // $users = User::with('teacher')->get();
+        // $users2 = $users->with('teacherClass')->get();
+        // dd($users2);
+
+        
         $user = auth()->user();
         $teacherDetails = $user->teacherDetails();
+    
+        
+        
+        $client_data = [];
+        foreach($teacherDetails as $teacherDetail){
+            
+            $teacherCLass = Teacher::find($teacherDetail->id)->with('teacherClass')->get();
+            foreach($teacherCLass as $teacherCLasses ){
+                print_r($teacherCLasses); die();
+            }
+            // echo"<pre>";print_r($teacher);die();
+            // dd($teacher);
+            $teacher_class ="";
+            if(is_array($teacherCLass->class_id)){
+                foreach($teacherCLass->class_id as $class_id){
+                    $teacher_class .= '<span class="badge bg-primary">Class '.$class_id.'</span>';
+                }
+            }else{
+                $teacher_class .= '<span class="badge bg-primary">Class '.$teacherDetail->class_id.'</span>';
+            }
+
+            $client_data[] = array(
+                "id" => $teacherDetail->id,
+                'name' => $teacherDetail->name,
+                "email" => $teacherDetail->email,
+                "class_id" => $teacher_class
+            );
+        }
     
         return response()->json([
             'draw' => $request->input('draw', 1),
             'recordsTotal' => $teacherDetails->count(),
             'recordsFiltered' => $teacherDetails->count(),
-            'data' => $teacherDetails,
+            'data' => $client_data,
         ]);
     }
+    // Add Teacher
     public function store(Request $request){
-        echo'hello';
-        echo '<pre>';
-         print_r($request->all());
-         echo '</pre>';
-
+  
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
@@ -83,10 +116,26 @@ class TeacherController extends Controller
         ]);
     }
     }
-    public function editTeacher(){
+    // Edit Teacher
+    public function editTeacher(Request $request){
+        $id = $request->id;
+        $name = $request->name;
+        $email = $request->email;
+        $class = $request->classes;
 
+        $users = User::where('email',$email)->update(['name' => $name]);
+
+        TeacherClass::where('teacher_id', $id)->delete();
+
+        $class = $request->classes;
+        foreach($class as $classes){
+            $teacherClass = TeacherClass::create([
+                'teacher_id' => $id,
+                'class_id' => $classes,
+            ]);
     }
-
+}
+   // Delete Teacher
     public function delete(Request $request){
         $id = $request->id;
         $email = $request->email;

@@ -33,9 +33,23 @@ Route::middleware('auth')->group(function () {
 // // My Crud File
 // Route::post('insert', 'TeacherController');
 
+// Teacher Route
 Route::get('/viewTeacher', [TeacherController::class,'viewTeacher'])->name('viewTeacher');
+Route::post('/editTeacher', [TeacherController::class,'editTeacher'])->name('editTeacher');
 Route::post('/addTeacher',[TeacherController::class,'store'])->name('addTeacher');
 Route::post('/deleteTeacher',[TeacherController::class,'delete'])->name('deleteTeacher');
+
+// Class Route
+// Route::get('/viewTeacher', [TeacherController::class,'viewTeacher'])->name('viewTeacher');
+// Route::post('/editTeacher', [TeacherController::class,'editTeacher'])->name('editTeacher');
+// Route::post('/addTeacher',[TeacherController::class,'store'])->name('addTeacher');
+// Route::post('/deleteTeacher',[TeacherController::class,'delete'])->name('deleteTeacher');
+
+// Student Route
+// Route::get('/viewTeacher', [TeacherController::class,'viewTeacher'])->name('viewTeacher');
+// Route::post('/editTeacher', [TeacherController::class,'editTeacher'])->name('editTeacher');
+// Route::post('/addTeacher',[TeacherController::class,'store'])->name('addTeacher');
+// Route::post('/deleteTeacher',[TeacherController::class,'delete'])->name('deleteTeacher');
 
 
 require __DIR__.'/auth.php';
