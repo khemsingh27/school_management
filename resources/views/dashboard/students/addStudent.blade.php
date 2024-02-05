@@ -2,47 +2,43 @@
 
 @section('content')
 <section class="section">
-        <div class="container mt-2">
-            <div class="welcome text-center">
-               <!-- Button to open the modal -->
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTeacherModal"
-                    style="float:right">
-                    Add Teacher
-                </button>
+    <div class="container mt-2">
+        <div class="welcome text-center">
+            <!-- Button to open the modal -->
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal"
+                style="float:right">
+                Add Student
+            </button>
 
-                <!-- Modal for Adding/Edit Class -->
-                <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content" style="background: #f6f7fc;">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addTeacherModalLabel">Add Teacher</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Add your form elements for adding/editing a class here -->
-                                <form id="addTeacherForm">
-                                    @csrf
-                                    <!-- <input type="hidden" name="form_action" value="school_register" /> -->
-                                    <input type="hidden" name="form_action" id="edit" value="add_Teacher" />
-                                    <input type="hidden" name="user_type" id="user_type" value="teacher" />
-                                    <input type="hidden" name="id" id="id" value="id" />
-                                    <div class="blockone d-flex justify-content-between" style="column-gap: 10px;">
-                                        <!-- Name -->
-                                        <div class="mb-3 text-start w-50">
-                                            <label for="name" class="form-label">Name</label>
-                                            <!-- <input type="text" class="form-control" id="firstname" name="firstname" required> -->
-                                            <input type="text" class="form-control newmodel" id="name" name="name"
-                                                pattern="[A-Za-z]+" title="Please enter letters only" required>
-                                        </div>
-                                        <!-- Email -->
-                                        <div class="mb-3 text-start w-50">
-                                            <label for="email" class="form-label">Email address</label>
-                                            <input type="email" class="form-control newmodel" id="email" name="email"
-                                                required>
-                                        </div>
-                                    </div>
+            <!-- Modal for Adding/Edit Class -->
+            <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addStudentModalLabel">Add Student</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Add your form elements for adding/editing a class here -->
+                            <form id="addStudentForm">
+                                @csrf
+                                <!-- <input type="hidden" name="form_action" value="Student_register" /> -->
+                                <input type="hidden" name="form_action" id="edit" value="add_Student" />
+                                <input type="hidden" name="user_type" id="user_type" value="Student" />
+                                <input type="hidden" name="id" id="id" value="id" />
+                                <!-- Name -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <!-- <input type="text" class="form-control" id="firstname" name="firstname" required> -->
+                                    <input type="text" class="form-control" id="name" name="name" pattern="[A-Za-z]+"
+                                        title="Please enter letters only" required>
+                                </div>
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
                                     <!-- Classes -->
                                     <div class="mb-3 text-start w-100">
                                         <label for="class" class="form-label">Class</label>
@@ -52,51 +48,50 @@
                                             <!-- Options will be dynamically added here -->
                                         </select>
                                     </div>
-                                    <div class="blocktwo d-flex justify-content-between" style="column-gap: 10px;">
-                                        <!-- Password -->
-                                        <div class="mb-3 text-start w-50">
-                                            <label for="password" class="form-label" id="passwordLabel">Password</label>
-                                            <input type="password" class="form-control newmodel" id="password"
-                                                name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-                                        </div>
-                                        <!-- Confirm Password -->
-                                        <div class="mb-3 text-start w-50">
-                                            <label for="password_confirmation" class="form-label"
-                                                id="confirmPasswordLabel">Confirm Password</label>
-                                            <input type="password" class="form-control newmodel"
-                                                id="password_confirmation" name="password_confirmation" required>
-                                            <div id="passwordError" style="color: red;"></div>
-                                        </div>
-                                    </div>
-                                    <!-- Submit Button -->
-                                    <button type="submit" id="addTeacherBtn" class="btn btn-primary" name="signup"
-                                        style="float: left; background: #717ff5; border: none;">Add Teacher</button>
-                                </form>
-                            </div>
+                                <!-- Password -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label" id="passwordLabel">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required
+                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                                </div>
+                                <!-- Confirm Password -->
+                                <div class="mb-3">
+                                    <label for="password_confirmation" class="form-label"
+                                        id="confirmPasswordLabel">Confirm Password</label>
+                                    <input type="password" class="form-control" id="password_confirmation"
+                                        name="password_confirmation" required>
+                                    <div id="passwordError" style="color: red;"></div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="submit" id="addStudentBtn" class="btn btn-primary" name="signup">Sign
+                                    Up</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-                <!-- DataTable to display classes -->
-                <table id="example" class="display" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Classes</th>
-                            <th>Action</th>
-                        </tr>
-                    <tbody>
-                    </tbody>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
             </div>
+
+            <!-- DataTable to display classes -->
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Class</th>
+                        <th>Action</th>
+                    </tr>
+                <tbody>
+                </tbody>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-    </section>
+    </div>
+</section>
 <script>
     $(document).ready(function () {
         var csrfToken = $('meta[name="csrf-token"]').attr('content');
@@ -118,11 +113,12 @@
                 console.error('Error fetching class data:', error);
             }
         });
-        // View Teachers
+
+        // View Students
         var dataTable = $('#example').DataTable({
             "serverSide": true,
             "ajax": {
-                "url": "{{ route('viewTeacher') }}",
+                "url": "{{ route('viewStudent') }}",
                 "type": "GET",
                 "headers": {
                     'X-CSRF-TOKEN': csrfToken
@@ -136,7 +132,7 @@
                 {
                     "render": function (data, type, full, meta) {
                         console.log('Full Object:', full);
-                        return '<a data-bs-toggle="modal" data-bs-target="#addTeacherModal"  class="btn btn-info edit" data-id="' + (full.id || '') + '" data-name="' + (full.name || '') + '" data-email="' + (full.email || '') + '"><i class="fa-solid fa-pencil"></i></a>&nbsp;' +
+                        return '<a data-bs-toggle="modal" data-bs-target="#addStudentModal"  class="btn btn-info edit" data-id="' + (full.id || '') + '" data-name="' + (full.name || '') + '" data-email="' + (full.email || '') + '"><i class="fa-solid fa-pencil"></i></a>&nbsp;' +
                             '<a class="btn btn-danger delete" data-id="' + (full.id || '') + '" data-email="' + (full.email || '') + '"><i class="fa-solid fa-trash"></i></a>';
                     }
                 }
@@ -144,8 +140,8 @@
         });
 
 
-        // Add Teachers
-        $('#addTeacherBtn').on('click', function (event) {
+        // Add Students
+        $('#addStudentBtn').on('click', function (event) {
             event.preventDefault();
 
             //Custom Method For Password Validation
@@ -157,8 +153,8 @@
                 "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
             );
             // Initialize the form validation
-            var addTeacherForm = $('#addTeacherForm');
-            addTeacherForm.validate({
+            var addStudentForm = $('#addStudentForm');
+            addStudentForm.validate({
                 rules: {
                     name: {
                         required: true
@@ -203,7 +199,7 @@
             });
 
             // Check if the form is valid before making the AJAX request
-            if (addTeacherForm.valid()) {
+            if (addStudentForm.valid()) {
                 var id = $('#id').val();
                 var name = $('#name').val();
                 var email = $('#email').val();
@@ -215,8 +211,8 @@
 
                 $.ajax({
                     method: 'POST',
-                    // url: "{{ route('addTeacher') }}",
-                    url: (formAction == 'add_Teacher') ? "{{ route('addTeacher') }}" : "{{ route('editTeacher') }}",
+                    // url: "{{ route('addStudent') }}",
+                    url: (formAction == 'add_Student') ? "{{ route('addStudent') }}" : "{{ route('editStudent') }}",
                     headers: {
                         'X-CSRF-TOKEN': csrfToken
                     },
@@ -231,7 +227,7 @@
                     },
                     success: function (response) {
                         console.log('AJAX Success:', response);
-                        $('#addTeacherModal').modal('hide');
+                        $('#addStudentModal').modal('hide');
                         dataTable.ajax.reload();
                     },
                     error: function (xhr, status, error) {
@@ -250,10 +246,10 @@
             }
         });
 
-        // To edit Teacher
+        // To edit Student
         $('#example').on('click', '.edit', function () {
             console.log('entered 1');
-            var currentTeacherId = $(this).data('id');
+            var currentStudentId = $(this).data('id');
             // var name = $('#name').val();
             var id = $(this).data('id');
             var name = $(this).data('name');
@@ -261,9 +257,9 @@
             var class_id = $(this).data('class_id');
 
             // Update modal title, change button label, and set form action to 'edit_classes'
-            $('#addTeacherModalLabel').text('Edit Teacher');
-            $('#addTeacherBtn').text('Edit Teacher');
-            $('#edit').val('edit_Teacher');
+            $('#addStudentModalLabel').text('Edit Student');
+            $('#addStudentBtn').text('Edit Student');
+            $('#edit').val('edit_Student');
 
             // Prefill the form with the class name
             $('#id').val(id).trigger('change');
@@ -277,23 +273,23 @@
             // $("#class option[value=" + class_id + "]").attr("selected", "selected");
             // console.log('entered 2');
             // Show the modal
-            $('#addTeacherModal').modal('show');
+            $('#addStudentModal').modal('show');
         });
 
 
-        // To Delete Teachers
+        // To Delete Students
         $('#example').on('click', '.delete', function () {
-            var teacherId = $(this).data('id');
+            var StudentId = $(this).data('id');
             var email = $(this).data('email');
             console.log('Entered into Delete classes');
             if (confirm("Are you sure you want to delete this class?")) {
                 $.ajax({
                     type: 'POST',
-                    url: "{{ route('deleteTeacher') }}",
+                    url: "{{ route('deleteStudent') }}",
                     headers: {
                         'X-CSRF-TOKEN': csrfToken
                     },
-                    data: { id: teacherId, email: email },
+                    data: { id: StudentId, email: email },
                     success: function (response) {
                         console.log('AJAX Success:', response);
                         $('#example').DataTable().ajax.reload();
@@ -304,13 +300,11 @@
                 });
             }
         });
-
-
         //     // Reset modal state on close
-        $('#addTeacherModal').on('hidden.bs.modal', function () {
-            $('#addTeacherModalLabel').text('Add Teacher');
-            $('#addTeacherBtn').text('Add Teacher');
-            $('#edit').val('add_Teacher');
+        $('#addStudentModal').on('hidden.bs.modal', function () {
+            $('#addStudentModalLabel').text('Add Student');
+            $('#addStudentBtn').text('Add Student');
+            $('#edit').val('add_Student');
             $('#name').val('').trigger('change');
             $('#email').val('').trigger('change');
             $('#email').attr('readonly', false);
@@ -323,15 +317,15 @@
             $('#confirmPasswordLabel').text('Confirm Password ');
         });
 
+    });
 
-        // Multi Select Drop Down
-        $(document).ready(function () {
-            $('.js-example-basic-multiple').select2({
-                dropdownParent: $('#addTeacherModal'),
-                // dropdownParent: ".mb-3",
-                placeholder: 'Select Class',
-                width: '100%',
-            });
+    // Multi Select Drop Down
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2({
+            dropdownParent: $('#addStudentModal'),
+            // dropdownParent: ".mb-3",
+            placeholder: 'Select Class',
+            width: '100%',
         });
     });
 </script>

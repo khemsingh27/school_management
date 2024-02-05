@@ -1,21 +1,9 @@
-<div class="pagetitle">
-    <h1>StudentAttendance</h1>
-    <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item">StudentAttendance</li>
-        </ol>
-    </nav>
-</div><!-- End Page Title -->
+@extends('dashboard')
 
+@section('content')
 <section class="section">
-    <div class="container mt-5"></div>
-    <div class="container mt-5">
+    <div class="container mt-2">
         <div class="welcome text-center">
-            <h1 class="mb-4">Welcome,
-                <!-- {{$user = auth()->user()}} -->
-                {{$user->name}}
-            </h1>
             <div class="attendance">
                 <form id="attendanceForm">
                     @csrf
@@ -127,7 +115,8 @@
             var class_id = $(this).data('class_id');
             var Attendance_type = $(this).val();
             var date = $('#datepicker').val();
-            console.log(date);
+            var studentId = $(this).data('id');
+            console.log(id);
             $.ajax({
                 type: 'POST',
                 url: "{{ route('studentAttendance') }}",
@@ -177,3 +166,4 @@
         });
     });
 </script>
+@endsection

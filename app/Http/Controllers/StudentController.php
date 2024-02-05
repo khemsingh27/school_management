@@ -22,18 +22,6 @@ class StudentController extends Controller
             'data' => $Student,
         ]);
     }
-    // View Student
-    public function viewStudentAttendance(Request $request){
-        $classId = $request->classId;
-        $user = auth()->user();
-        $Student = $user->studentAttendanceDetails($classId);
-        return response()->json([
-            'draw' => $request->input('draw', 1),
-            'recordsTotal' => $Student->count(),
-            'recordsFiltered' => $Student->count(),
-            'data' => $Student,
-        ]);
-    }
     // Add Student
     public function addStudent(Request $request){
         $request->validate([

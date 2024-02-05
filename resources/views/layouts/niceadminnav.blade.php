@@ -108,8 +108,8 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
       <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-          <img src="assets/img/poplify.png" alt="">
+        <a href="{{route('dashboard') }}" class="logo d-flex align-items-center">
+          <img src="../assets/img/poplify.png" alt="">
           <span class="d-none d-lg-block"></span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -224,7 +224,7 @@
 
               <li class="message-item">
                 <a href="#">
-                  <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                  <img src="../assets/img/messages-1.jpg" alt="" class="rounded-circle">
                   <div>
                     <h4>Maria Hudson</h4>
                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -238,7 +238,7 @@
 
               <li class="message-item">
                 <a href="#">
-                  <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                  <img src="../assets/img/messages-2.jpg" alt="" class="rounded-circle">
                   <div>
                     <h4>Anna Nelson</h4>
                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -252,7 +252,7 @@
 
               <li class="message-item">
                 <a href="#">
-                  <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                  <img src="../assets/img/messages-3.jpg" alt="" class="rounded-circle">
                   <div>
                     <h4>David Muldon</h4>
                     <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -275,7 +275,7 @@
           <li class="nav-item dropdown pe-3">
 
             <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <img src="../assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
               <!-- {{$user = auth()->user()}} -->
               <span class="d-none d-md-block dropdown-toggle ps-2">{{$user->name}}</span>
             </a><!-- End Profile Iamge Icon -->
@@ -358,23 +358,23 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-          <a class="nav-link" id="teacher" href="{{route('viewTeacher') }}">
-            <i class="fa-solid fa-school"></i><span>Teacher</span>
+          <a class="nav-link" id="teacher" href="{{ route('dashboard.teachers') }}">
+            <i class="fa-solid fa-t"></i><span>Teacher</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="student" href="#">
-            <i class="fa-solid fa-school"></i><span>Student</span>
+          <a class="nav-link" id="student" href="{{ route('dashboard.students') }}">
+          <i class="fa-solid fa-s"></i><span>Student</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="classes" href="#">
-            <i class="fa-solid fa-school"></i><span>Classes</span>
+          <a class="nav-link" id="classes" href="{{ route('dashboard.classes') }}">
+          <i class="fa-solid fa-c"></i><span>Classes</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="attendance" href="#">
-            <i class="fa-solid fa-school"></i><span>Attendance</span>
+          <a class="nav-link" id="attendance" href="{{ route('dashboard.attendance') }}">
+          <i class="fa-solid fa-a"></i><span>Attendance</span>
           </a>
         </li>
         <!-- End Components Nav -->

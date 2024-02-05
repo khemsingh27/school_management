@@ -1,68 +1,15 @@
 @include('layouts.niceAdminNav')
 <main id="main" class="main">
-                  <!-- {{$user = auth()->user()}} -->
-    <h1>Welcome {{$user->name}}</h1>
-    @include('studentAttendance')
+<div class="pagetitle">
+    <h1>{{$title}}</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+            <li class="breadcrumb-item">{{$title}}</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+    <h1>Welcome {{auth()->user()->name}}</h1>
+    @yield('content')
 </main>
 @include('layouts/footer')
-
-<script>
-        $(document).ready(function () {
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            // Teacher
-            $('#sidebar').on('click', '#teacher', function (event) {
-                event.preventDefault();
-            console.log('Entered into Delete classes');
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('viewTheTeacher') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success: function (data) {
-                        $("#main").html(data.main);
-                        // window.history.pushState("Details", "Title", "{{url('/')}}/viewTeacher");
-                    },
-                    error: function (xhr, status, error) {
-                        console.log('AJAX Error:', error);
-                    }
-                });
-        });
-        // Student
-        $('#sidebar').on('click', '#student', function (event) {
-                event.preventDefault();
-            console.log('Entered into Delete classes');
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('viewTheStudent') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success: function (data) {
-                        $("#main").html(data.main);
-                    },
-                    error: function (xhr, status, error) {
-                        console.log('AJAX Error:', error);
-                    }
-                });
-        });
-        // Classes
-        $('#sidebar').on('click', '#classes', function (event) {
-                event.preventDefault();
-            console.log('Entered into Delete classes');
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('viewTheClasses') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    },
-                    success: function (data) {
-                        $("#main").html(data.main);
-                    },
-                    error: function (xhr, status, error) {
-                        console.log('AJAX Error:', error);
-                    }
-                });
-        });
-    });
-</script>

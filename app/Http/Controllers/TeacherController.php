@@ -150,7 +150,6 @@ class TeacherController extends Controller
     }
     // New View teacher
     public function newView(){
-        $main = "Hello";
         $teacher = view('auth.addteacher')->render();
         return response()->json([
             'status' => true,

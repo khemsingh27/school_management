@@ -85,16 +85,19 @@ class User extends Authenticatable
         ->get();
         return $Student;
     }
-    public function studentAttendanceDetails($classId)
+    public function studentAttendanceDetails($classId, $date)
     {
         $userSchoolId = auth()->user()->school->id;
-        $Student = DB::table('users')
-        ->join('students', 'users.id', '=', 'students.users_id')
-        ->join('schools', 'schools.id', '=', 'students.school_id')
-        ->leftJoin('student_attendance', 'student_attendance.student_id', '=', 'students.id')
-        ->where('schools.id', '=', $userSchoolId)
-        ->where('students.class_id', '=', $classId)
-        ->select('students.id', 'users.name', 'users.email', 'students.class_id', 'student_attendance.attendence_type')
+        $Student = DB::table('users as u')
+        ->join('students as st', 'u.id', '=', 'st.users_id')
+        ->join('schools as sc', 'st.school_id', '=', 'sc.id')
+        ->leftJoin('student_attendance as sa', function ($join) use ($date) {
+            $join->on('sa.student_id', '=', 'st.id')
+                 ->where(DB::raw('DATE(sa.created_at)'), '=', $date);
+        })
+        ->where('sc.id', '=', $userSchoolId)
+        ->where('st.class_id', '=', $classId)
+        ->select('st.id', 'u.name', 'u.email', 'st.class_id', 'sa.attendence_type')
         ->get();
         return $Student;
     }

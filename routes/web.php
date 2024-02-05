@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassController;
@@ -26,7 +27,7 @@ Route::get('/welcome', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['title' => 'Dashboard']);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -52,23 +53,21 @@ Route::post('/deleteClass',[ClassController::class,'deleteClass'])->name('delete
 
 // Student Route
 Route::get('/viewStudent', [StudentController::class,'viewStudent'])->name('viewStudent');
-Route::get('/viewStudentAttendance', [StudentController::class,'viewStudentAttendance'])->name('viewStudentAttendance');
 Route::post('/editStudent', [StudentController::class,'editStudent'])->name('editStudent');
 Route::post('/addStudent',[StudentController::class,'addStudent'])->name('addStudent');
 Route::post('/deleteStudent',[StudentController::class,'deleteStudent'])->name('deleteStudent');
 
-// Testing Route
-Route::post('/viewTheTeacher',[TeacherController::class,'newView'])->name('viewTheTeacher');
-Route::post('/viewTheStudent',[StudentController::class,'newView'])->name('viewTheStudent');
-Route::post('/viewTheClasses',[ClassController::class,'newView'])->name('viewTheClasses');
-
-//attendance
+//Attendance
 Route::get('/studentAttendance', function () {
     return view('studentAttendance');
 });
 Route::post('/studentAttendance', [AttendanceController::class,'studentAttendance'])->name('studentAttendance');
-
-
+Route::post('/deleteStudentAttendance', [AttendanceController::class,'deleteStudentAttendance'])->name('deleteStudentAttendance');
 Route::get('/show', [AttendanceController::class,'viewStudentWithAttendance'])->name('show');
 
+// DashBoard Route
+Route::get('/dashboard/teachers', [DashboardController::class,'teachers'])->middleware(['auth', 'verified'])->name('dashboard.teachers');
+Route::get('/dashboard/students', [DashboardController::class,'students'])->middleware(['auth', 'verified'])->name('dashboard.students');
+Route::get('/dashboard/classes_', [DashboardController::class,'classes'])->middleware(['auth', 'verified'])->name('dashboard.classes');
+Route::get('/dashboard/attendance', [DashboardController::class,'attendance'])->middleware(['auth', 'verified'])->name('dashboard.attendance');
 require __DIR__.'/auth.php';
