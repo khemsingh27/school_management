@@ -23,4 +23,8 @@ class DashboardController extends Controller
     {
         return view('dashboard.attendance.studentAttendance', ['title' => 'StudentAttendance']);
     }
+    public function teacher_attendance()
+    {
+        return view('dashboard.attendance.teacherAttendance', ['title' => 'TeacherAttendance']);
+    }
 }

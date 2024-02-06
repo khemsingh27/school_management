@@ -9,7 +9,7 @@
         </ol>
     </nav>
 </div><!-- End Page Title -->
-    <h1>Welcome {{auth()->user()->name}}</h1>
+    <div class="name d-flex justify-content-center"><h1>Welcome {{auth()->user()->name}}</h1></div>
     @yield('content')
 </main>
 @include('layouts/footer')

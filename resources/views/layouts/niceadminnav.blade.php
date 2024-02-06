@@ -68,7 +68,7 @@
     }
 
 
-    .select2-selection {
+    .select2-selection, .form-select{
       border: none!important;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1)!important;
       border-radius: 4px!important;
@@ -99,6 +99,9 @@
     #example{
       width: 100%!important;
     }
+    .modal-content{
+      background: #f6f7fc;
+    }
   </style>
 </head>
 
@@ -108,19 +111,12 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
       <div class="d-flex align-items-center justify-content-between">
-        <a href="{{route('dashboard') }}" class="logo d-flex align-items-center">
+        <a href="{{route('dashboard') }}" class="logo d-flex align-items-center justify-content-between">
           <img src="../assets/img/poplify.png" alt="">
           <span class="d-none d-lg-block"></span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div><!-- End Logo -->
-
-      <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
-          <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-          <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-      </div><!-- End Search Bar -->
 
       <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -373,9 +369,21 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="attendance" href="{{ route('dashboard.attendance') }}">
+          <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" id="attendance" >
           <i class="fa-solid fa-a"></i><span>Attendance</span>
           </a>
+          <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{ route('dashboard.attendance') }}">
+              <i class="bi bi-circle"></i><span>Student Attendance</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('dashboard.teacher_attendance') }}">
+              <i class="bi bi-circle"></i><span>Teacher Attendance</span>
+            </a>
+          </li>
+        </ul>
         </li>
         <!-- End Components Nav -->
       </ul>

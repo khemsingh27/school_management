@@ -64,10 +64,12 @@ Route::get('/studentAttendance', function () {
 Route::post('/studentAttendance', [AttendanceController::class,'studentAttendance'])->name('studentAttendance');
 Route::post('/deleteStudentAttendance', [AttendanceController::class,'deleteStudentAttendance'])->name('deleteStudentAttendance');
 Route::get('/show', [AttendanceController::class,'viewStudentWithAttendance'])->name('show');
+Route::get('/showTeacher', [AttendanceController::class,'showTeacher'])->name('showTeacher');
 
 // DashBoard Route
 Route::get('/dashboard/teachers', [DashboardController::class,'teachers'])->middleware(['auth', 'verified'])->name('dashboard.teachers');
 Route::get('/dashboard/students', [DashboardController::class,'students'])->middleware(['auth', 'verified'])->name('dashboard.students');
 Route::get('/dashboard/classes_', [DashboardController::class,'classes'])->middleware(['auth', 'verified'])->name('dashboard.classes');
 Route::get('/dashboard/attendance', [DashboardController::class,'attendance'])->middleware(['auth', 'verified'])->name('dashboard.attendance');
+Route::get('/dashboard/teacher_attendance', [DashboardController::class,'teacher_attendance'])->middleware(['auth', 'verified'])->name('dashboard.teacher_attendance');
 require __DIR__.'/auth.php';

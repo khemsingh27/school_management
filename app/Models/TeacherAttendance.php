@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StudentAttendance extends Model
+class TeacherAttendance extends Model
 {
     use HasFactory;
-    protected $table = 'student_attendance';
+    protected $table = 'teacher_attendance';
     protected $fillable = [
         'student_id',
         'school_id',
@@ -17,10 +17,6 @@ class StudentAttendance extends Model
         'created_at',
         'updated_at',
     ];
-    public function school()
-    {
-        return $this->belongsTo(School::class);
-    }
     public function attendance_type()
     {
         return $this->belongsTo(AttendanceType::class);

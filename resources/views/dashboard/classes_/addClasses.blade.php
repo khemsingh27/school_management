@@ -31,12 +31,12 @@
                                     <!-- Name -->
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name"
+                                        <input type="text" class="form-control newmodel" id="name" name="name"
                                             pattern="[A-Za-z]+" title="Please enter letters only" required>
                                     </div>
                                         <!-- Submit Button -->
                                         <button type="submit" id="addClassBtn" class="btn btn-primary"
-                                            name="signup">Sign
+                                            name="signup" style="float: left; background: #717ff5; border: none;">Sign
                                             Up</button>
                                 </form>
                             </div>

@@ -27,46 +27,48 @@
                                 <input type="hidden" name="form_action" id="edit" value="add_Student" />
                                 <input type="hidden" name="user_type" id="user_type" value="Student" />
                                 <input type="hidden" name="id" id="id" value="id" />
-                                <!-- Name -->
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name</label>
-                                    <!-- <input type="text" class="form-control" id="firstname" name="firstname" required> -->
-                                    <input type="text" class="form-control" id="name" name="name" pattern="[A-Za-z]+"
-                                        title="Please enter letters only" required>
-                                </div>
-                                <!-- Email -->
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                    <!-- Classes -->
-                                    <div class="mb-3 text-start w-100">
-                                        <label for="class" class="form-label">Class</label>
-                                        <!-- Change the id attribute from 'class' to 'classSelect' -->
-                                        <select class="js-example-basic-multiple" id="classSelect" name="class[]"
-                                            multiple required>
-                                            <!-- Options will be dynamically added here -->
-                                        </select>
+                                <div class="blockone d-flex justify-content-between" style="column-gap: 10px;">
+                                        <!-- Name -->
+                                        <div class="mb-3 text-start w-50">
+                                            <label for="name" class="form-label">Name</label>
+                                            <!-- <input type="text" class="form-control" id="firstname" name="firstname" required> -->
+                                            <input type="text" class="form-control newmodel" id="name" name="name"
+                                                pattern="[A-Za-z]+" title="Please enter letters only" required>
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="mb-3 text-start w-50">
+                                            <label for="email" class="form-label">Email address</label>
+                                            <input type="email" class="form-control newmodel" id="email" name="email"
+                                                required>
+                                        </div>
                                     </div>
-                                <!-- Password -->
+                                <!-- Classes -->
                                 <div class="mb-3">
-                                    <label for="password" class="form-label" id="passwordLabel">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" required
-                                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                                    <label for="class" class="form-label">Class</label>
+                                    <!-- Change the id attribute from 'class' to 'classSelect' -->
+                                    <select class="form-select" id="classSelect" name="class" required>
+                                        <!-- Options will be dynamically added here -->
+                                    </select>
                                 </div>
-                                <!-- Confirm Password -->
-                                <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label"
-                                        id="confirmPasswordLabel">Confirm Password</label>
-                                    <input type="password" class="form-control" id="password_confirmation"
-                                        name="password_confirmation" required>
-                                    <div id="passwordError" style="color: red;"></div>
-                                </div>
-
+                                <div class="blocktwo d-flex justify-content-between" style="column-gap: 10px;">
+                                        <!-- Password -->
+                                        <div class="mb-3 text-start w-50">
+                                            <label for="password" class="form-label" id="passwordLabel">Password</label>
+                                            <input type="password" class="form-control newmodel" id="password"
+                                                name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                                        </div>
+                                        <!-- Confirm Password -->
+                                        <div class="mb-3 text-start w-50">
+                                            <label for="password_confirmation" class="form-label"
+                                                id="confirmPasswordLabel">Confirm Password</label>
+                                            <input type="password" class="form-control newmodel"
+                                                id="password_confirmation" name="password_confirmation" required>
+                                            <div id="passwordError" style="color: red;"></div>
+                                        </div>
+                                    </div>
                                 <!-- Submit Button -->
-                                <button type="submit" id="addStudentBtn" class="btn btn-primary" name="signup">Sign
-                                    Up</button>
+                                <button type="submit" id="addStudentBtn" class="btn btn-primary" name="signup" style="float: left; background: #717ff5; border: none;">Add Student</button>
                             </form>
                         </div>
                     </div>
@@ -315,17 +317,6 @@
             $('#password_confirmation').attr('type', 'password');
             $('#password_confirmation').val('');
             $('#confirmPasswordLabel').text('Confirm Password ');
-        });
-
-    });
-
-    // Multi Select Drop Down
-    $(document).ready(function () {
-        $('.js-example-basic-multiple').select2({
-            dropdownParent: $('#addStudentModal'),
-            // dropdownParent: ".mb-3",
-            placeholder: 'Select Class',
-            width: '100%',
         });
     });
 </script>

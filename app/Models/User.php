@@ -97,9 +97,24 @@ class User extends Authenticatable
         })
         ->where('sc.id', '=', $userSchoolId)
         ->where('st.class_id', '=', $classId)
-        ->select('st.id', 'u.name', 'u.email', 'st.class_id', 'sa.attendence_type')
+        ->select('st.id', 'u.name', 'u.email', 'st.class_id', 'sa.attendance_type')
         ->get();
         return $Student;
+    }
+    public function teacherAttendanceDetails($classId, $date)
+    {
+        $userSchoolId = auth()->user()->school->id;
+        $Teacher = DB::table('users as u')
+        ->join('teachers as st', 'u.id', '=', 'st.users_id')
+        ->join('schools as sc', 'st.school_id', '=', 'sc.id')
+        ->leftJoin('student_attendance as sa', function ($join) use ($date) {
+            $join->on('sa.student_id', '=', 'st.id')
+                 ->where(DB::raw('DATE(sa.created_at)'), '=', $date);
+        })
+        ->where('sc.id', '=', $userSchoolId)
+        ->select('st.id', 'u.name', 'u.email', 'sa.attendance_type')
+        ->get();
+        return $Teacher;
     }
 
     public function deleteTeacher($id, $email)
