@@ -9,11 +9,6 @@
                     @csrf
                     <div class="row">
                         <div class="col">
-                            <label for="exampleFormControlSelect1">Class</label>
-                            <select class="form-control" id="classSelect" required>
-                            </select>
-                        </div>
-                        <div class="col">
                             <label for="birthday">Date</label>
                             <input type="date" class="datepicker" id="datepicker" name="datepicker" required>
                         </div>
@@ -69,10 +64,9 @@
         // View teacher Attendance
         $('#datesubmit').on('click', function (event) {
             event.preventDefault();
-            var selectedClass = $('#classSelect').val();
             var selectedDate = $('#datepicker').val();
 
-            if (selectedClass && selectedDate) {
+            if (selectedDate) {
                 $('#error-message').hide().text('');
                 $('#classSelect, #datepicker').css('box-shadow', '');
                 $('#example').show('slide');
@@ -92,7 +86,6 @@
                             'X-CSRF-TOKEN': csrfToken
                         },
                         data: function (d) {
-                            d.classId = $('#classSelect').val();
                             d.date = $('#datepicker').val();
                         }
                     },
@@ -103,8 +96,8 @@
                     ]
                 });
             } else {
-                $('#error-message').text('Please select both Class and Date before searching.').show();
-                $('#classSelect, #datepicker').css('box-shadow', '0 0 5px rgba(255, 0, 0, 0.7)');
+                $('#error-message').text('Please select Date before searching.').show();
+                $('#datepicker').css('box-shadow', '0 0 5px rgba(255, 0, 0, 0.7)');
             }
         });
 

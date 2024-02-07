@@ -12,13 +12,15 @@
 :root {
   scroll-behavior: smooth;
 }
-
 body {
   font-family: "Open Sans", sans-serif;
   background: #f6f9ff;
   color: #444444;
 }
-
+table.dataTable.no-footer {
+  border-bottom: 0 !important;
+  border-top: 0 !important;
+}
 a {
   color: #4154f1;
   text-decoration: none;
@@ -602,7 +604,7 @@ h6 {
   top: 60px;
   left: 0;
   bottom: 0;
-  width: 300px;
+  width: 250px;
   z-index: 996;
   transition: all 0.3s;
   padding: 20px;
@@ -633,7 +635,7 @@ h6 {
 
   #main,
   #footer {
-    margin-left: 300px;
+    margin-left: 250px;
   }
 }
 
